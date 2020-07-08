@@ -1,0 +1,34 @@
+[{
+    "_id": {
+      "$oid": "5edcd666574ec89375a0bed6"
+    },
+    "name": "karthik mani",
+    "userName": "kmani",
+    "password": "1",
+    "picture": "http://localhost:8080/images/kartik_dp.PNG"
+  },{
+    "_id": {
+      "$oid": "5edcd758adaec063fcc010a3"
+    },
+    "name": "shiv tilva",
+    "userName": "shiv",
+    "password": "1",
+    "picture": "http://localhost:8080/images/user-profile.png"
+  },{
+    "_id": {
+      "$oid": "5edcd78cadaec063fcc010a4"
+    },
+    "name": "kiran lach",
+    "userName": "kiran",
+    "password": "1",
+    "picture": "http://localhost:8080/images/kiran_dp.PNG"
+  },{
+    "_id": {
+      "$oid": "5edd3cb5f5e9168a68573d85"
+    },
+    "name": "jonanthan",
+    "userName": "jhon",
+    "password": "1",
+    "picture": "http://localhost:8080/images/kiran_dp.PNG"
+  }]
+  

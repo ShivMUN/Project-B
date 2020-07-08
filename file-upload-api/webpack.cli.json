@@ -1,0 +1,8 @@
+{
+    "environment": "production",
+    "build": {
+        "main": "Index.ts",
+        "outputFile": "api.bundle.js",
+        "outputDirectory": "dist"
+    }
+}

@@ -1,0 +1,32 @@
+[
+    {
+        "id": "1",
+        "fileName": "marksheet",
+        "contentType": "csv",
+        "size": "20mb"
+    },
+    {
+        "id": "1",
+        "fileName": "trading file 2020",
+        "contentType": "xls",
+        "size": "25mb"
+    },
+    {
+        "id": "1",
+        "fileName": "Dhoom-2 movie",
+        "contentType": "mpeg-4",
+        "size": "25mb"
+    },
+    {
+        "id": "2",
+        "fileName": "contacts",
+        "contentType": "txt",
+        "size": "2mb"
+    },
+    {
+        "id": "3",
+        "fileName": "URI-movie",
+        "contentType": "MPEG-2",
+        "size": "50gb"
+    }
+]
