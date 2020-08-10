@@ -28,9 +28,6 @@ const schema = new Schema({
     },
     size: {
         type: String,
-    },
-    fileOwnerId: {
-        type: mongoose.Schema.Types.ObjectId
     }
 },
     { timestamps: true });

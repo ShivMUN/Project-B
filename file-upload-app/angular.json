@@ -119,10 +119,6 @@
           }
         }
       }
-    }
-  },
-  "defaultProject": "file-upload-app",
-  "cli": {
-    "analytics": "721709ab-c6d2-4996-a8e6-40bdf7a7e037"
-  }
+    }},
+  "defaultProject": "file-upload-app"
 }

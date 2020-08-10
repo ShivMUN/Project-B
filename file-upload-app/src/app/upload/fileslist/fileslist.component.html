@@ -21,9 +21,10 @@
                         <div class="h5 mb-0 font-weight-bold text-gray-800"> {{file?.fileName}}</div>
                     </div>
                     <div class="col-auto">
-                        <i (click)="downloadFile(file?.id)"
+                        <i (click)="downloadFile(file)"
                             class="fas fa-cloud-download-alt fa-2x text-gray-300 spacing-file"></i>
-                        <i (click)="deleteFile(file?.id)" class="fas fa-trash-alt fa-2x text-gray-300 spacing-file"></i>
+                        <i (click)="deleteFile(file?._id)"
+                            class="fas fa-trash-alt fa-2x text-gray-300 spacing-file"></i>
                     </div>
                 </div>
             </div>

@@ -6,19 +6,12 @@
   "scripts": {
     "lint:fix": "tslint --fix --project tsconfig.json",
     "lint": "tslint --project tsconfig.json",
-    "start:dev": "nodemon  --exec \"npm run lint && ts-node -r tsconfig-paths/register\" ./src/Index.ts",
-    "build:ts": "npm run clean:win && tsc",
-    "build:webpack": "npm run clean:win && webpack",
-    "debug": "nodemon --exec ts-node  -r tsconfig-paths/register ./src/Index.ts",
-    "debug:vs": "nodemon --watch src/**/* -e ts,json --exec node --inspect-brk -r ts-node/register -r tsconfig-paths/register ./src/Index.ts",
-    "debug:ts": "ts-node  -r tsconfig-paths/register ./src/Index.ts",
     "clean": "rm -rf dist && mkdir dist",
     "clean:win": "rimraf dist && mkdir dist",
-    "start": "npm run build:webpack && npm run exec",
-    "start:ts": "npm run build:ts && npm run exec:ts",
-    "exec": "node ./dist/api.bundle.js",
-    "exec:ts": "node --inspect -r ./tsconfig-paths-bootstrap.js ./dist/Index.js",
-    "debug:thread": "nodemon -e ts  --exec \" npm run start:ts \""
+    "start": "npm run lint && npm run build:ts && npm run exec:ts",
+    "build:ts": "npm run clean:win && tsc",
+    "exec:ts": "node --inspect ./dist/Index.js",
+    "debug": "nodemon -e ts  --exec \" npm run start\""
   },
   "author": "",
   "license": "ISC",

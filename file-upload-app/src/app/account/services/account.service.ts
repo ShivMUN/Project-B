@@ -15,8 +15,8 @@ export class AccountService {
     picture: 'http://localhost:8080/images/kartik_dp.PNG'
   };
 
-  // private authUserSubject = new BehaviorSubject<User>({} as User);
-  private authUserSubject = new BehaviorSubject<User>(this.defaultUser);
+  private authUserSubject = new BehaviorSubject<User>({} as User);
+  // private authUserSubject = new BehaviorSubject<User>(this.defaultUser);
   public authUser = this.authUserSubject.asObservable().pipe(distinctUntilChanged());
 
   //private isAuthenticatedSubject = new ReplaySubject<boolean>(0);

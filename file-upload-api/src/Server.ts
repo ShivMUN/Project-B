@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import app from "./App";
 import logger from "./core/utility/Logger";
-import config from "./config/Index";
+import config from "./config";
 import dbConnection from "./core/utility/DbConnection";
 
 

@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
-import { AccountService } from 'src/app/account/services/account.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { saveAs } from 'file-saver';
+
+
+import { AccountService } from 'src/app/account/services/account.service';
+import { environment } from 'src/environments/environment';
 import { User } from 'src/app/account/models/user';
 
 
@@ -18,7 +21,7 @@ export class FileslistComponent implements OnInit {
   isError: boolean;
   message: string;
   baseUrl: string;
-  filelist: IFile[];
+  filelist: IFile[] = [];
 
 
   constructor(private spinner: NgxSpinnerService, private http: HttpClient, private router: Router, private authService: AccountService
@@ -44,64 +47,77 @@ export class FileslistComponent implements OnInit {
   loadFile() {
     this.spinner.show(); // start the spinner loader
 
-    // get the data to the api using http client of the angular i.e performing an ajax request
-    this.http.get('../../../assets/mock/filelist.json')      // pass the UserID to get the current user files only
-      .subscribe((res: IFile[]) => {
-        console.log(res);
-        this.filelist = res;
-        this.isError = false;
-        this.spinner.hide(); // close the spinling loader
-      }, (error: any) => {
-        console.log(error);  // log the error in the console
-        this.message = error.message;
-        this.isError = true; // update the error flag as true ... to show error message in UI
-        this.spinner.hide(); // close the spinling loader
-      });
+    setTimeout(() => {
+      // get the data to the api using http client of the angular i.e performing an ajax request
+      this.http.get(`${this.baseUrl}/files/${this.user._id}`)      // pass the UserID to get the current user files only
+        .subscribe((res: IFile[]) => {
+          console.log(res);
+          this.filelist = res;
+          this.isError = false;
+          this.spinner.hide(); // close the spinling loader
+        }, (error: any) => {
+          console.log(error);  // log the error in the console
+          this.message = error.message;
+          this.isError = true; // update the error flag as true ... to show error message in UI
+          this.spinner.hide(); // close the spinling loader
+        });
+    }, 1000);
 
 
   }
 
-  downloadFile(id: string) {
-    console.log(`file id to download ${id}`);
+  downloadFile(file: { id: string, fileName: string }) {
+    console.log(`file id to download ${JSON.stringify(file)}`);
 
     this.spinner.show(); // start the spinner loader
-    // get the data to the api using http client of the angular i.e performing an ajax request
-    this.http.get(`${this.baseUrl}/download/${id}`)      // pass the fileId to get the  files from the API
-      .subscribe((res: any) => {
-        if (res) {
-          this.isError = false;
+
+    setTimeout(() => {
+      // get the data to the api using http client of the angular i.e performing an ajax request
+      this.http.get(`${this.baseUrl}/download/${file.id}`, {  // pass the fileId to get the  files from the API
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+        }), responseType: 'blob'
+      })
+        .subscribe((res: any) => {
+          if (res) {
+            saveAs(res, file.fileName);
+            this.isError = false;
+            this.spinner.hide(); // close the spinling loader
+          }
+        }, (error: any) => {
+          console.log(error);  // log the error in the console
+          this.message = error.message;
+          this.isError = true; // update the error flag as true ... to show error message in UI
           this.spinner.hide(); // close the spinling loader
-        }
-      }, (error: any) => {
-        console.log(error);  // log the error in the console
-        this.message = error.message;
-        this.isError = true; // update the error flag as true ... to show error message in UI
-        this.spinner.hide(); // close the spinling loader
-      });
+        });
 
 
+    }, 1000);
   }
 
   deleteFile(id: string) {
     console.log(`file id to delete ${id}`);
+
     this.spinner.show(); // start the spinner loader
 
-    // get the data to the api using http client of the angular i.e performing an ajax request
-    this.http.post(`${this.baseUrl}/delete`, { id })      // pass the UserID to get the current user files only
-      .subscribe((res: any) => {
-        if (res) {
-          this.isError = false;
-          this.message = 'file deleted successfully!'; // success message to show in UI
+    setTimeout(() => {
+      // get the data to the api using http client of the angular i.e performing an ajax request
+      this.http.delete(`${this.baseUrl}/delete/${id}`)      // pass the UserID to get the current user files only
+        .subscribe((res: any) => {
+          if (res) {
+            this.isError = false;
+            this.message = 'file deleted successfully!'; // success message to show in UI
+            this.spinner.hide(); // close the spinling loader
+            this.loadFile();
+          }
+        }, (error: any) => {
+          console.log(error);  // log the error in the console
+          this.message = error.message;
+          this.isError = true; // update the error flag as true ... to show error message in UI
           this.spinner.hide(); // close the spinling loader
-          this.loadFile();
-        }
-      }, (error: any) => {
-        console.log(error);  // log the error in the console
-        this.message = error.message;
-        this.isError = true; // update the error flag as true ... to show error message in UI
-        this.spinner.hide(); // close the spinling loader
-      });
+        });
 
+    }, 1000);
   }
 
 
@@ -110,6 +126,7 @@ export class FileslistComponent implements OnInit {
 
 
 interface IFile {
+  _id?: string;
   id: string;
   fileName: string;
   contentType: string;

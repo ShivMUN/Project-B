@@ -5,12 +5,11 @@ import morgan from "morgan";
 import cors from "cors";
 import bodyParser from "body-parser";
 import { route } from "./Route";
-// import fileUpload from "express-fileupload";
 import path from "path";
 import fs from "fs";
 
 import logger from "./core/utility/Logger";
-import config from "./config/Index";
+import config from "./config";
 
 export default class App {
 
@@ -37,17 +36,13 @@ export default class App {
     }
 
     private initFileUpload(app: Application) {
-        if (!fs.existsSync(config.filePath)) {
-            fs.mkdirSync(config.filePath);
+        if (!fs.existsSync(config.fileStorageTempDirectory)) {
+            fs.mkdirSync(config.fileStorageTempDirectory);
         }
-        // app.use(express.static(config.filePath));
-        // app.use(fileUpload({
-        //     useTempFiles: false,
-        //     tempFileDir: path.resolve(config.filePath)
-        // }));
-
-        app.use(express.static(path.join(__dirname, config.filePath))); //serve static files of server
-        //  app.use(fileUpload());
+        if (!fs.existsSync(config.fileStorageDirectory)) {
+            fs.mkdirSync(config.fileStorageDirectory);
+        }
+        app.use(express.static(path.join(__dirname, config.filePath))); // serve static files of server
     }
 
 

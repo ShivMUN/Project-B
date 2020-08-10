@@ -64,7 +64,9 @@ export class FileuploadComponent implements OnInit {
     this.http.post(`${baseUrl}/upload`, formData)
       .subscribe((res: any) => {
         console.log(res);
-        this.message = 'successfully uploaded the file';
+        this.fileName = null;
+        this.files = null;
+        this.message = res.message;
         this.isError = false;
         this.spinner.hide(); // close the spinling loader
       }, (error: any) => {

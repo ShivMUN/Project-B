@@ -3,5 +3,5 @@
 # dependencies
 /node_modules
 /dist
-/file-storage
 /temp
+/file-storage

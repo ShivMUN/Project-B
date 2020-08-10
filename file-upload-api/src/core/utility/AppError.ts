@@ -9,7 +9,6 @@ export default class AppError extends Error {
         Error.captureStackTrace(this);
         this.message = _message;
         this.isOperational = _isOperational;
-        //this.name = this.constructor.name; // Optional
     }
 }
 
